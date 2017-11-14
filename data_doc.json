@@ -1,0 +1,53 @@
+[
+{
+  "Name": "Tom Corcoran",
+  "User_ID": 1,
+  "Email": "tcorc@bu.edu",
+  "Password": "1234",
+  "Teams": [
+    "Team_ID_1",
+    "Team_ID_2"
+  ],
+  "Available_Times": [
+    "Tuesday 1-2",
+    "Tuesday 3-4",
+    "Wednesday 11-12"
+  ]
+},{
+  "Team_Name": "Team 1",
+  "Team_ID": 1,
+  "Emails": [
+  	"tcorc@bu.edu",
+    "tomcorc@bu.edu",
+    "thomascorc@bu.edu"
+  ],
+  "User_IDs": [
+    "User_ID_1",
+    "User_ID_2"
+  ],
+  "Available_Times_Objs": [
+  	{
+    	"Time_ID": 1,
+    	"Time": "Tuesday 1-2",
+      "Total_Votes": 5,
+      "Voters": [
+      	"User_ID_1",
+    		"User_ID_2",
+        "User_ID_3",
+    		"User_ID_4",
+        "User_ID_5"
+      ]
+    },
+    {
+    	"Time_ID": 2,
+    	"Time": "Tuesday 3-4",
+      "Total_Votes": 2,
+      "Voters": [
+      	"User_ID_6",
+    		"User_ID_7"
+      ]
+    }
+  ],
+  "Best_Time": 1
+}
+]
