@@ -1,11 +1,25 @@
 <div>
+  
+  <input type="text" id="name" placeholder="Name" ng-model="name" />
 
-<button ng-click="getData()">Get Data</button>
+  <input type="text" id="email" placeholder="Email" ng-model="email" />
 
-<input type="text" ng-model="searchBox" />
+  <input type="text" id="password" placeholder="Password" ng-model="password" />
 
-<p ng-repeat="date in data">ID: {{date.id}} || Date: {{date.date}} || Time: {{date.time}}{{date.am_pm}}</p>
+  <input type="text" id="page_source" placeholder="Page Source" ng-model="page_source" />
 
-<p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
+  <button id="submit_btn" ng-click="userSubmit()">Submit</button>
+
+  <h4>{{ user_data }}</h4>
+
+  <br>
+
+  <button ng-click="getData()">Get Data</button>
+
+  <input type="text" ng-model="searchBox" />
+
+  <p ng-repeat="date in data">ID: {{date.id}} || Date: {{date.date}} || Time: {{date.time}}{{date.am_pm}}</p>
+
+  <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
 
 </div>
