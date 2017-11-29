@@ -71,7 +71,7 @@ exports.renderNotFound = function (req, res) {
 exports.getData = function (req, res) {
 
     //res.send("test");
-    
+
     console.log("got GET request");
 
     var city = req.params.city;
@@ -93,3 +93,10 @@ exports.getData = function (req, res) {
           console.log("Error: " + err.message);
       });
 };
+
+exports.importCal = function(req,res){
+
+
+};
+
+
