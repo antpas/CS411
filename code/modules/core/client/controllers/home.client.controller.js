@@ -7,7 +7,7 @@
 
   function HomeController($scope, $http) {
     var vm = this;
-    
+
     $scope.name = "";
     $scope.email = "";
     $scope.password = "";
@@ -163,6 +163,18 @@
     $scope.searchBox = "";
 
     $scope.weather_arr = [];
+
+    $scope.authGoogle = function() {
+      console.log("sending req");
+
+      var s = '/auth-google';
+      $http.get(s).success(function(response){
+
+
+
+      });
+
+    };
 
     $scope.getData = function(){
         $scope.weather_arr = [];

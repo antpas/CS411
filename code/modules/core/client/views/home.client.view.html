@@ -1,5 +1,5 @@
 <div>
-  
+
   <input type="text" id="name" placeholder="Name" ng-model="name" />
 
   <input type="text" id="email" placeholder="Email" ng-model="email" />
@@ -22,4 +22,19 @@
 
   <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
 
+  <body>
+  <div id='content'>
+    <h1>Login</h1>
+    <ul id='events'></ul>
+  </div>
+  <a href='#' id='authorize-button' ng-click="authGoogle()">Login</a>
+
+  <script>
+    // Insert the JS from above, here.
+  </script>
+  <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+  </body>
+
 </div>
+
+

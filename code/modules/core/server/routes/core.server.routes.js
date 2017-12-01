@@ -1,5 +1,6 @@
 'use strict';
 
+
 module.exports = function (app) {
   // Root routing
   var core = require('../controllers/core.server.controller');
@@ -14,25 +15,24 @@ module.exports = function (app) {
 
   app.route('/import-cal').get(core.importCal);
 
+  app.route('/auth-google').get(core.authGoogle);
   //User
 
-  app.route('/create-user').post(core.createUser);
-
-  app.route('/update-user').post(core.updateUser);
-
-  app.route('/get-user-data').get(core.getUserData);
-
-  // Teams
-
-  app.route('/create-team').post(core.createTeam);
-
-  app.route('/update-team').post(core.updateTeam);
-
-  app.route('/get-team-data').get(core.getTeamData);
+  // app.route('/create-user').post(core.createUser);
+  //
+  // app.route('/update-user').post(core.updateUser);
+  //
+  // app.route('/get-user-data').get(core.getUserData);
+  //
+  // // Teams
+  //
+  // app.route('/create-team').post(core.createTeam);
+  //
+  // app.route('/update-team').post(core.updateTeam);
+  //
+  // app.route('/get-team-data').get(core.getTeamData);
 
   // Define application route
   app.route('/*').get(core.renderIndex);
-
-
 
 };

@@ -3,6 +3,10 @@ const request = require('request');
 const axios = require('axios');
 const https = require('https');
 
+// var clientId = '1047116930477-ih7sksdovml1ikvh6p36bns1usa0hcki.apps.googleusercontent.com';
+// var apiKey = '9WvhN3o7H-QRjc7J_ZclAFqn';
+// var scopes = 'https://www.googleapis.com/auth/calendar';
+
 
 var validator = require('validator'),
   path = require('path'),
@@ -97,6 +101,29 @@ exports.getData = function (req, res) {
 exports.importCal = function(req,res){
 
 
+
 };
+
+exports.authGoogle = function(req,resp) {
+
+  console.log("Got GET from Google");
+  https.get('https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly&access_type=offline&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri=http://localhost:3000&response_type=code&client_id=1047116930477-ih7sksdovml1ikvh6p36bns1usa0hcki.apps.googleusercontent.com', (resp) => {
+    let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
+});
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    res.json(data);
+});
+
+}).on("error", (err) => {
+    console.log("Error: " + err.message);
+});
+};
+
 
 
