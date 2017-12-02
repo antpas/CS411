@@ -2,10 +2,6 @@
 
 * Team 11: Ghada Abahussain, Tom Corcoran, Jesse Fimbres, Anthony Pasquariello
 
-
-CS 411 - Group 11 Project - Website Application
-
-This is Group 11's GitHub repository for the final project.
 <!-- Description -->
 
 # Features
