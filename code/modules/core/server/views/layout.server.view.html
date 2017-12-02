@@ -164,6 +164,7 @@
         'orderBy': 'startTime'
       }).then(function(response) {
         var events = response.result.items;
+        var busyTimes = [];
 
         if (events.length > 0) {
           for (i = 0; i < events.length; i++) {
@@ -174,7 +175,16 @@
             }
           }
         }
-        console.log(events);
+
+        for(i =0; i < events.length; i++){
+          busyTimes[i] = events[i].start.dateTime;
+          console.log(busyTimes[i]);
+
+          i = i + 1;
+          busyTimes[i] = events[i-1].end.dateTime;
+
+          console.log(busyTimes[i]);
+        }
       });
     }
   </script>
