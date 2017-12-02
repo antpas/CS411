@@ -38,8 +38,10 @@ Our website serves as a automated scheduler for groups and teams and Boston Univ
   ```bash
   $ npm start
   ```
+  
+  Run MongoDB 
 
-  Your application should run on port 3000 with the *development* environment configuration, so in your browser just go to [http://localhost:3000](http://localhost:3000)
+  Your application should run on port 3000: [http://localhost:3000](http://localhost:3000)
 
 
 
