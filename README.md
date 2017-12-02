@@ -48,7 +48,7 @@ Our website serves as a automated scheduler for groups and teams and Boston Univ
  ```
   * Windows
   ```bash 
-  $ cd C:\Program Files\MongoDB\Server\3.2\bin>
+  $ cd C:\Program Files\MongoDB\Server\3.2\bin
   $ mongod
 ```
 
