@@ -40,6 +40,17 @@ Our website serves as a automated scheduler for groups and teams and Boston Univ
   ```
   
   Run MongoDB 
+  
+  * MacOS
+ ```bash
+  $ cd <Project Directory>/code
+  $ mongo
+ ```
+  * Windows
+  ```bash 
+  $ cd C:\Program Files\MongoDB\Server\3.2\bin>
+  $ mongod
+```
 
   Your application should run on port 3000: [http://localhost:3000](http://localhost:3000)
 
