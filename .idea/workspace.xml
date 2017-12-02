@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efb89f15-4b32-4c66-89b1-0cdc70242aa6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/app.log" afterPath="$PROJECT_DIR$/code/app.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/modules/core/server/views/layout.server.view.html" afterPath="$PROJECT_DIR$/code/modules/core/server/views/layout.server.view.html" />
     </list>
@@ -31,8 +30,8 @@
       <file leaf-file-name="layout.server.view.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/modules/core/server/views/layout.server.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="183" column="35" lean-forward="false" selection-start-line="183" selection-start-column="35" selection-end-line="183" selection-end-column="35" />
+            <state relative-caret-position="704">
+              <caret line="219" column="37" lean-forward="false" selection-start-line="219" selection-start-column="37" selection-end-line="219" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -191,12 +190,12 @@
       <workItem from="1512161213399" duration="122000" />
       <workItem from="1512161616272" duration="1286000" />
       <workItem from="1512163055835" duration="6805000" />
-      <workItem from="1512241437336" duration="9044000" />
+      <workItem from="1512241437336" duration="11958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24149000" />
+    <option name="totallyTimeSpent" value="27063000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -576,14 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/modules/core/client/views/home.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -608,10 +599,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/modules/core/client/views/home.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/modules/core/server/views/layout.server.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="183" column="35" lean-forward="false" selection-start-line="183" selection-start-column="35" selection-end-line="183" selection-end-column="35" />
+        <state relative-caret-position="704">
+          <caret line="219" column="37" lean-forward="false" selection-start-line="219" selection-start-column="37" selection-end-line="219" selection-end-column="37" />
           <folding />
         </state>
       </provider>
