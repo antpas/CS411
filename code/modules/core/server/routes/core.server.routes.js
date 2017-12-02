@@ -15,7 +15,6 @@ module.exports = function (app) {
 
   app.route('/import-cal').get(core.importCal);
 
-  app.route('/auth-google').get(core.authGoogle);
   //User
 
   // app.route('/create-user').post(core.createUser);
