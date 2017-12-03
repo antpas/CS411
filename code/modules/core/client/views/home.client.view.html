@@ -8,9 +8,6 @@
 <button ng-click="cur_view = 'Admin_Manage'">Admin_Manage</button>
 <button ng-click="cur_view = 'Weather'">Weather</button>
 
-
-
-
   <div ng-show="cur_view == 'SignUp'">
 
     <div class="container">
@@ -70,17 +67,34 @@
 
     </div>
 
-
-
 </div>
 
 <div ng-show="cur_view == 'SignIn'">
 
-    <input type="text" id="login_username" placeholder="Email" ng-model="login_username" />
+    <!--<input type="text" id="login_username" placeholder="Email" ng-model="login_username" />-->
 
-    <input type="text" id="login_password" placeholder="Password" ng-model="login_password" />
+    <!--<input type="text" id="login_password" placeholder="Password" ng-model="login_password" />-->
 
-    <button ng-click="login()">Sign In</button>
+  <!-- EMAIL -->
+  <div class="form-group"  ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+    <label>Email</label>
+    <input type="email" id="login_username" name="email" class="form-control" ng-model="login_username">
+    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+  </div>
+
+  <label>Password</label>
+  <input placeholder="Password"
+         class="form-control"
+         id="login_password"
+         name="password" ng-model="login_password" ng-model-options="{ updateOn: 'blur' }"
+         required type="password" pattern=".{5,}" />
+  <div class="error-message"
+       ng-show="userForm.password.$invalid && !userForm.password.$pristine">
+    Passwords must have at least 5 chars.
+  </div>
+
+
+  <button ng-click="login()">Sign In</button>
 
 </div>
 

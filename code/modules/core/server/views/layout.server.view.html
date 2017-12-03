@@ -97,6 +97,7 @@
 <body>
 
   <script type="text/javascript">
+    var x = "String";
     function handleClientLoad() {
       // Loads the client library and the auth2 library together for efficiency.
       // Loading the auth2 library is optional here since `gapi.client.init` function will load
@@ -226,6 +227,9 @@
           var day_of_week_string = n;
           busy[day_of_week_string].push(time)
         }
+//        $("/busy", function(data,status){
+//            console.log("Sent");
+//          });
         console.log(busy);
 
       });
