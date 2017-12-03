@@ -11,10 +11,10 @@ module.exports = function (app) {
     // Connect to the db
     MongoClient.connect("mongodb://localhost:27017/411", function(err, database) {
       if(err) { 
-      	console.log("12345fsgfsfshfsff")
-      	return console.dir(err); 
+        console.log("12345fsgfsfshfsff")
+        return console.dir(err); 
       }else{
-      	console.log("connected");
+        console.log("connected");
       }
 
       //database.createCollection('users', function(err, collection) {});
@@ -29,7 +29,7 @@ module.exports = function (app) {
   
   
   function am_pm_to_hours(time) {
-				var temp = time.slice(time.length-2, time.length)
+                var temp = time.slice(time.length-2, time.length)
         time = time.slice(0,time.length-2)
         time = time + " " + temp;
         var hours = Number(time.match(/^(\d+)/)[1]);
@@ -46,7 +46,7 @@ module.exports = function (app) {
 
     function isBusy(start, end, time){
 
-    	start = hrToInt(start);
+        start = hrToInt(start);
       end = hrToInt(end);
       time = hrToInt(time);
 
@@ -55,15 +55,15 @@ module.exports = function (app) {
     }
 
     function hrToInt(str){
-    	return parseFloat(str.replace(":", "."))
+        return parseFloat(str.replace(":", "."))
     }
 
     function makeNumbersRange(min, max){
 
-			var min_d = new Date();
-   	 	min_d.setHours(min);
+            var min_d = new Date();
+        min_d.setHours(min);
       var max_d = new Date();
-   	 	max_d.setHours(max);
+        max_d.setHours(max);
 
 
 
@@ -75,23 +75,23 @@ module.exports = function (app) {
 
 
 
-    	var arr = [];
+        var arr = [];
       var minute = 0;
       var hour = Math.floor(min);
 
       for(var i = 0; i < diffMins; i++){
 
-      	if(minute == 60){
-        	minute = 0
+        if(minute == 60){
+            minute = 0
           hour++
         }
 
         var val;
 
         if(minute < 10){
-        	val = hour + ":0" + minute;
+            val = hour + ":0" + minute;
         }else{
-        	val = hour + ":" + minute;
+            val = hour + ":" + minute;
         }
 
 
@@ -109,47 +109,47 @@ module.exports = function (app) {
 
     function getPotentialTimes(obj, times){
 
-    	var potential_times = {
-        Monday: [],
-        Tuesday: [],
-        Wednesday: [],
-        Thursday: [],
-        Friday: []
-      };
+        var potential_times = {
+          "Mon": [],
+          "Tue": [],
+          "Wed": [],
+          "Thu": [],
+          "Fri": []
+        };
 
 
       var delta = 5;
 
-    	for(key in obj){
+        for(var key in obj){
 
-      	var streak_counter = 0;
-
-
-      	for(var b = 0; b < obj[key].length; b++){
+        var streak_counter = 0;
 
 
+        for(var b = 0; b < obj[key].length; b++){
 
-        	if(obj[key][b] == 1){
 
-          	if(b == times.length-1){
 
-            	if(streak_counter >= delta){
+            if(obj[key][b] == 1){
+
+            if(b == times.length-1){
+
+                if(streak_counter >= delta){
                 potential_times[key].push([times[b-streak_counter], times[b]])
               }
 
             }
 
-          	streak_counter++;
+            streak_counter++;
 
           }else if(obj[key][b] == 0 || b == times.length-1){
 
 
 
-          	if(streak_counter >= delta){
-            	potential_times[key].push([times[b-streak_counter], times[b]])
+            if(streak_counter >= delta){
+                potential_times[key].push([times[b-streak_counter], times[b]])
             }
 
-          	streak_counter = 0;
+            streak_counter = 0;
 
           }
 
@@ -181,42 +181,48 @@ module.exports = function (app) {
   //    Friday: []
   //  }
   //];
+
+      console.log("main_arr", main_arr);
         
         var temp = {
-      Monday: [],
-      Tuesday: [],
-      Wednesday: [],
-      Thursday: [],
-      Friday: []
-    };
+          "Mon": [],
+          "Tue": [],
+          "Wed": [],
+          "Thu": [],
+          "Fri": []
+        };
 
         for(var i = 0; i < main_arr.length; i++){
         
             for(var key2 in main_arr[i]){
     
-            for(var z = 0; z < main_arr[i][key2].length; z++){
-            main_arr[i][key2][z] = am_pm_to_hours(main_arr[i][key2][z])
+              for(var z = 0; z < main_arr[i][key2].length; z++){
+                main_arr[i][key2][z] = am_pm_to_hours(main_arr[i][key2][z])
+              }
+
+              console.log("key2", key2)
+              console.log("temp[key2]", temp[key2])
+
+    
+              temp[key2] = temp[key2].concat(main_arr[i][key2]);
+    
           }
-    
-            temp[key2] = temp[key2].concat(main_arr[i][key2]);
-    
-        }
     
       }
         
         var all_times = makeNumbersRange(min, max);
         
         var final = {
-          Monday: [],
-          Tuesday: [],
-          Wednesday: [],
-          Thursday: [],
-          Friday: []
+          "Mon": [],
+          "Tue": [],
+          "Wed": [],
+          "Thu": [],
+          "Fri": []
         };
 
         for(var key in temp){
 
-  		    var bin_array = [];
+            var bin_array = [];
 
           for(var t = 0; t < all_times.length; t++){
     
@@ -247,6 +253,41 @@ module.exports = function (app) {
         
         
     }
+
+    function generateUUID() {
+        var d = new Date().getTime();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (d + Math.random()*16)%16 | 0;
+            d = Math.floor(d/16);
+            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        });
+    }
+
+    function makeVoteFormat(obj){
+
+      var Available_Times_Objs = [];
+
+      for(var key in obj){
+
+        for(var i = 0; i < obj[key].length; i++){
+
+          var temp = {
+            "Time_ID": generateUUID(),
+            "Time": key + " " + obj[key][i][0] + " - " + obj[key][i][1],
+            "Total_Votes": 0,
+            "Voters": []
+          }
+
+          Available_Times_Objs.push(temp)
+        
+
+        }
+
+      }
+
+      return Available_Times_Objs;
+
+    }
   
   
   
@@ -263,6 +304,50 @@ module.exports = function (app) {
   //app.route('/import-cal').get(core.importCal);
 
 //User
+
+app.route('/free-times').post(function(req, res) {
+      
+      var user_data = req.body;
+
+
+      db.collection('users').find({}).toArray(function(err, res2){
+
+          var user_times = []
+
+          for(var i = 0; i < res2.length; i++){
+
+            if(res2[i].Teams.indexOf(user_data.Team_ID) != -1){
+
+              user_times.push(res2[i].Busy_Times);
+
+            }
+
+          }
+
+          var time_obj = merge_times(user_data.min, user_data.max, user_times);
+
+          var Available_Times_Objs = makeVoteFormat(time_obj);
+
+          db.collection('teams').update({Team_ID: user_data.Team_ID}, {$set: {"Available_Times_Objs": Available_Times_Objs}}, function (err, res3) {
+          
+              db.collection('teams').findOne({Team_ID: user_data.Team_ID}, function (err, res4) {
+                  if(err){
+                      
+                  }else{
+                      console.log("free time responce", res4);
+                      
+                      res.json(res4);
+                      
+                  }
+              });
+              
+          });
+
+          
+
+      });
+      
+  });
   
   app.route('/create-user').post(function(req, res) {
       var user_data = req.body;
@@ -310,15 +395,15 @@ module.exports = function (app) {
   app.route('/vote').post(function(req, res) {
       var obj = req.body;
       console.log("vote obj", obj);
-      db.collection('teams').update({Team_ID: obj.id}, {$set: {"Available_Times_Objs": obj.data}}, function (err, res) {
+      db.collection('teams').updateOne({Team_ID: obj.id}, {$set: {"Available_Times_Objs": obj.data}}, function (err, res2) {
           
-          db.collection('teams').findOne({Team_ID: obj.id}, function (err, res2) {
+          db.collection('teams').findOne({Team_ID: obj.id}, function (err, res3) {
               if(err){
                   
               }else{
-                  console.log("vote responce", res2);
+                  console.log("vote responce", res3);
                   
-                  res.json(res2);
+                  res.json(res3);
                   
               }
           });
