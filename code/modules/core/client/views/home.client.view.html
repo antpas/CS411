@@ -1,26 +1,79 @@
 <div>
+<button ng-click="cur_view = 'SignUp'">SignUp</button>
+<button ng-click="cur_view = 'SignIn'">SignIn</button>
+<button ng-click="cur_view = 'User'">User</button>
+<button ng-click="cur_view = 'Voting'">Voting</button>
+<button ng-click="cur_view = 'Admin_SignIn'">Admin_SignIn</button>
+<button ng-click="cur_view = 'Admin_Create'">Admin_Create</button>
+<button ng-click="cur_view = 'Admin_Manage'">Admin_Manage</button>
+<button ng-click="cur_view = 'Weather'">Weather</button>
 
-  <input type="text" id="name" placeholder="Name" ng-model="name" />
+<div ng-show="cur_view == 'SignUp'">
 
-  <input type="text" id="email" placeholder="Email" ng-model="email" />
+    <input type="text" id="name" placeholder="Name" ng-model="name" />
 
-  <input type="text" id="password" placeholder="Password" ng-model="password" />
+    <input type="text" id="email" placeholder="Email" ng-model="email" />
 
-  <input type="text" id="page_source" placeholder="Page Source" ng-model="page_source" />
+    <input type="text" id="password" placeholder="Password" ng-model="password" />
 
-  <button id="submit_btn" ng-click="userSubmit()">Submit</button>
+    <input type="text" id="team_id" placeholder="Team ID" ng-model="team_id" />
 
-  <h4>{{ user_data }}</h4>
+    <input type="text" id="page_source" placeholder="Page Source" ng-model="page_source" />
 
-  <br>
+    <button id="submit_btn" ng-click="userSubmit()">Submit</button>
 
-  <button ng-click="getData()">Get Data</button>
+</div>
 
-  <input type="text" ng-model="searchBox" />
+<div ng-show="cur_view == 'SignIn'">
 
-  <p ng-repeat="date in data">ID: {{date.id}} || Date: {{date.date}} || Time: {{date.time}}{{date.am_pm}}</p>
+    <input type="text" id="login_username" placeholder="Email" ng-model="login_username" />
 
-  <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
+    <input type="text" id="login_password" placeholder="Password" ng-model="login_password" />
+
+    <button ng-click="login()">Sign In</button>
+
+</div>
+
+<div ng-show="cur_view == 'User'">
+
+    <h1>User Info</h1>
+
+    <button ng-click="getUserData()">Get Data</button>
+
+    <button ng-click="cur_view = 'Voting'">Vote</button>
+
+    <h4>Name: {{current_user.Name}}</h4>
+    <h4>User ID: {{current_user.User_ID}}</h4>
+    <h4>Email: {{current_user.Email}}</h4>
+    <h4>Password: {{current_user.Password}}</h4>
+    <h4>Teams: {{current_user.Teams}}</h4>
+    <h4>Busy Times: {{current_user.Busy_Times}}</h4>
+
+</div>
+
+<div ng-show="cur_view == 'Voting'">
+
+    <h1>Voting</h1>
+
+    <form name="votingForm">
+
+        <label ng-repeat="obj in current_team.Available_Times_Objs">
+         <input type="radio" name="vote_radio" ng-model="$parent.Time_ID" value="{{obj.Time_ID}}" required /> {{obj.Time}} ({{obj.Total_Votes}})
+        </label>
+
+        <button ng-click="submitVote()">Submit Vote</button>
+
+    </form>
+
+</div>
+
+<div ng-show="cur_view == 'Admin_SignIn'">
+
+    <input type="text" id="admin_login_username" placeholder="Email" ng-model="admin_login_username" />
+
+    <input type="text" id="admin_login_password" placeholder="Password" ng-model="admin_login_password" />
+
+    <button ng-click="adminLogin()">Sign In</button>
 
 </div>
 
@@ -30,4 +83,43 @@
 
 </div>
 
+<div ng-show="cur_view == 'Admin_Create'">
 
+    <h1>Create Team</h1>
+
+    <input type="text" id="c_team_name" placeholder="Team Name" ng-model="c_team_name" />
+
+    <input type="text" id="c_team_emails" placeholder="Emails" ng-model="c_team_emails" />
+
+    <input type="number" id="c_meeting_length" placeholder="Length of Meeting" ng-model="c_meeting_length" />
+
+    <input type="text" id="c_admin_email" placeholder="Admin Email" ng-model="c_admin_email" />
+
+    <input type="text" id="c_admin_password" placeholder="Admin Password" ng-model="c_admin_password" />
+
+    <button ng-click="createTeam()">Create Team</button>
+
+</div>
+
+<div ng-show="cur_view == 'Admin_Manage'">
+
+    <h1>Manage Team</h1>
+
+    <h4>Team ID: {{current_team.Team_ID}}</h4>
+
+    <h4>Users:</h4>
+
+    <p ng-repeat="user in current_team.Emails">{{user}}</p>
+
+</div>
+
+<div ng-show="cur_view == 'Weather'">
+
+    <button id="city_input" ng-click="getData()">Get Weather Data</button>
+
+    <input type="text" id="search_box" ng-model="search_box" />
+
+    <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
+
+</div>
+</div>
