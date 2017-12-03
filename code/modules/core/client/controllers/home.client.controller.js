@@ -207,6 +207,20 @@ $scope.updateUser = function () {
 
 };
 
+$scope.getFreeTimes = function () {
+
+
+    $http.post("/free-times", {Team_ID: $scope.current_team.Team_ID, min: 8, max: 14}).success(function(responce) {
+
+        //returns whole team object back
+        console.log("responce", responce);
+        $scope.current_team = responce;
+
+        console.log('got free times');
+      })
+
+};
+
 $scope.login = function(){
 
     var login_data = {
@@ -247,28 +261,26 @@ $scope.adminLogin = function(){
 
 $scope.submitVote = function () {
 
-    var selected_obj = {};
+    
 
     console.log($scope.votingForm.vote_radio.$modelValue);
 
     for(var i = 0; i < $scope.current_team.Available_Times_Objs.length; i++){
 
         if($scope.current_team.Available_Times_Objs[i].Time_ID == $scope.votingForm.vote_radio.$modelValue){
-            selected_obj = $scope.current_team.Available_Times_Objs[i];
-            selected_obj.Total_Votes += 1;
-            selected_obj.Voters.push($scope.current_user.User_ID);
+            $scope.current_team.Available_Times_Objs[i].Total_Votes += 1;
+            $scope.current_team.Available_Times_Objs[i].Voters.push("User_ID");//$scope.current_user.User_ID
         }
 
     }
 
-    console.log("for post", selected_obj);
 
     // post request to update object in team collection
     // updates object and returns whole team object back
 
     var obj = {
         id: $scope.current_team.Team_ID,
-        data: selected_obj
+        data: $scope.current_team.Available_Times_Objs
     };
 
     $http.post("/vote", obj).success(function(responce) {
@@ -293,7 +305,8 @@ $scope.createTeam = function () {
             "Max_Time":10
           },
         "Admin_Email": $scope.c_admin_email,
-        "Admin_Password": $scope.c_admin_password
+        "Admin_Password": $scope.c_admin_password,
+        "Available_Times_Objs": []
     };
 
     console.log("team obj", team_obj);
@@ -320,7 +333,7 @@ $scope.getData = function(){
 
     console.log("sending req");
 
-    var s = '/get-data/' + $scope.searchBox;
+    var s = '/get-data/' + $scope.search_box;
 
     $http.get(s).success(function(response){
 
