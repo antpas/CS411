@@ -155,25 +155,30 @@
 //    }
 
     function makeApiCall() {
+
+      var week = new Date();
+      week.setDate(week.getDate() + 6);
       gapi.client.calendar.events.list({
         'calendarId': 'primary',
         'timeMin': (new Date()).toISOString(),
         'showDeleted': false,
         'singleEvents': true,
-        'maxResults': 10,
+        'timeMax': week.toISOString(),
         'orderBy': 'startTime'
       }).then(function(response) {
         var events = response.result.items;
+        console.log(events);
         var busyTimes = [];
        // busy[0] = [Monday, [1:00, 5:00]];
         var weekday=new Array(7);
-        weekday[0]="Monday";
-        weekday[1]="Tuesday";
-        weekday[2]="Wednesday";
-        weekday[3]="Thursday";
-        weekday[4]="Friday";
-        weekday[5]="Saturday";
-        weekday[6]="Sunday";
+        weekday[0]="Sunday";
+        weekday[1]="Monday";
+        weekday[2]="Tuesday";
+        weekday[3]="Wednesday";
+        weekday[4]="Thursday";
+        weekday[5]="Friday";
+        weekday[6]="Saturday";
+
 
         if (events.length > 0) {
           for (i = 0; i < events.length; i++) {
@@ -185,14 +190,16 @@
           }
         }
 
-        for(i =0; i < events.length; i++){
-          busyTimes[i] = events[i].start.dateTime;
-          console.log(busyTimes[i]);
-          //n = busyTimes[i].getDay()
-          i = i + 1;
-          busyTimes[i] = events[i-1].end.dateTime;
+        var count = 0;
+        var i =0;
+        while(i < events.length){
+          busyTimes[count] = events[i].start.dateTime;
+          count = count + 1;
+          busyTimes[count] = events[i].end.dateTime;
+          count = count + 1;
 
-          console.log(busyTimes[i]);
+          i = i + 1;
+
         }
         var d;
         var n;
@@ -201,13 +208,13 @@
         var time;
 
         var busy = {
+          Sunday: [],
           Monday: [],
           Tuesday: [],
           Wednesday: [],
           Thursday: [],
           Friday: [],
-          Saturday: [],
-          Sunday: []
+          Saturday: []
         };
 
         for(var i = 0; i < busyTimes.length; i++){
