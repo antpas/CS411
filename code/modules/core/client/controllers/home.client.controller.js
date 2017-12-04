@@ -10,38 +10,7 @@
 $scope.cur_view = 'SignUp';
 $scope.selected_vote = "";
 $scope.current_team = {};
-$scope.current_team.Available_Times_Objs = [
-    {
-        "Time_ID": 1,
-        "Time": "Tue 11:00-12:00",
-        "Total_Votes": 5,
-        "Voters": [
-          "User_ID_1",
-          "User_ID_2",
-          "User_ID_3",
-          "User_ID_4",
-          "User_ID_5"
-        ]
-    },
-    {
-        "Time_ID": 2,
-        "Time": "Wed 10:00-14:00",
-        "Total_Votes": 2,
-        "Voters": [
-          "User_ID_6",
-          "User_ID_7"
-        ]
-    },
-    {
-        "Time_ID": 3,
-        "Time": "Thu 13:00-14:00",
-        "Total_Votes": 2,
-        "Voters": [
-          "User_ID_6",
-          "User_ID_7"
-        ]
-    }
-];
+
 $scope.search_box = "Boston";
 $scope.showVoteBtn = true;
 
@@ -49,17 +18,58 @@ function hrToInt(str){
     return parseFloat(str.replace(":", "."))
 }
 
+$scope.importTimesFromGC = function(){
+    var busy_times = makeApiCall();
+    busy_times.then(function(data){
+
+        angular.forEach(data, function(value, key){
+             
+            var formatted_key = key.slice(0, 3);
+
+            if($scope.current_user.Busy_Times[formatted_key]){
+                $scope.current_user.Busy_Times[formatted_key] = $scope.current_user.Busy_Times[formatted_key].concat(value);
+            }
+
+        });
+
+        var obj = {
+            id: $scope.current_user.User_ID,
+            data: $scope.current_user.Busy_Times
+        };
+
+    $http.post("/import-gc", obj).success(function(responce) {
+
+        //returns whole team object back
+        $scope.current_user = responce;
+
+        console.log('import successfully');
+
+      })
+
+
+    });
+    
+}
+
 
 $scope.getWeather = function (time){
 
 
-
     if($scope.weather_arr.length != 0){
+
+        //console.log("Time", time);
+
         var vote_arr = time.split(" ");
+
+        //console.log("vote_arr", vote_arr);
+
+        if(!vote_arr[3]){
+            return "few clouds"
+        }
+
         var vote_day = vote_arr[0];
-        var time_split = vote_arr[1].split("-");
-        var start = hrToInt(time_split[0]);
-        var end = hrToInt(time_split[1]);
+        var start = hrToInt(vote_arr[1]);
+        var end = hrToInt(vote_arr[3]);
 
         for(var i = 0; i < $scope.weather_arr.length; i++){
 
@@ -83,7 +93,7 @@ $scope.getWeather = function (time){
 
     }
 
-    return "No Weather Data";
+    return "few clouds";
 
 };
 
@@ -252,7 +262,7 @@ $scope.userSubmit = function () {
         console.log('Data posted successfully');
       })
 
-      $scope.cur_view = 'User';
+      $scope.cur_view = 'Created';
 
 };
 
@@ -307,6 +317,24 @@ $scope.adminLogin = function(){
         $scope.current_team = response;
 
         $scope.cur_view = 'Admin_Manage';
+
+    });
+
+};
+
+$scope.getVotingTimes = function(){
+
+    var login_data = {
+        Team_ID: $scope.voting_id,
+    };
+
+    $http.post('/get-voting-times', login_data).success(function(response){
+
+        console.log("got voting data", response);
+
+        $scope.current_team = response;
+
+        //$scope.cur_view = 'Voting';
 
     });
 
