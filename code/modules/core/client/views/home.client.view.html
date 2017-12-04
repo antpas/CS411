@@ -7,8 +7,8 @@
 <button ng-click="cur_view = 'Admin_Create'">Admin_Create</button>
 <button ng-click="cur_view = 'Admin_Manage'">Admin_Manage</button>
 <button ng-click="cur_view = 'Weather'">Weather</button>
-
-  <div ng-show="cur_view == 'SignUp'">
+    
+<div ng-show="cur_view == 'SignUp'">
 
     <div class="container">
       <div class="row">
@@ -117,17 +117,22 @@
 
 <div ng-show="cur_view == 'Voting'">
 
-    <h1>Voting</h1>
+    <center>
 
-    <form name="votingForm">
+        <h1>Voting Results</h1>
 
-        <label ng-repeat="obj in current_team.Available_Times_Objs">
-         <input type="radio" name="vote_radio" ng-model="$parent.Time_ID" value="{{obj.Time_ID}}" required /> {{obj.Time}} ({{obj.Total_Votes}})
-        </label>
+        <form name="votingForm" ng-if="weather_arr.length != 0">
 
-        <button ng-click="submitVote()">Submit Vote</button>
+            <div style="margin-top: 20px; font-size: 28px" ng-repeat="obj in current_team.Available_Times_Objs">
+             <input type="radio" name="vote_radio" ng-model="$parent.Time_ID" value="{{obj.Time_ID}}" required /> {{obj.Time}} || {{getWeather(obj.Time)}} || ({{obj.Total_Votes}} votes)
+            </div>
 
-    </form>
+
+            <button class="btn btn-success" style="margin-top: 20px" ng-click="submitVote(); showVoteBtn = false" ng-show="showVoteBtn">Submit Vote</button>
+
+        </form>
+
+    </center>
 
 </div>
 
@@ -186,4 +191,5 @@
     <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
 
 </div>
+
 </div>
