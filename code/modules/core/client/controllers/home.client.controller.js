@@ -6,14 +6,14 @@
     .controller('HomeController', HomeController);
 
   function HomeController($scope, $http) {
-$scope.current_user = {};
+    $scope.current_user = {};
 $scope.cur_view = 'SignUp';
 $scope.selected_vote = "";
 $scope.current_team = {};
 $scope.current_team.Available_Times_Objs = [
     {
         "Time_ID": 1,
-        "Time": "Tuesday 1-2",
+        "Time": "Tue 11:00-12:00",
         "Total_Votes": 5,
         "Voters": [
           "User_ID_1",
@@ -25,7 +25,16 @@ $scope.current_team.Available_Times_Objs = [
     },
     {
         "Time_ID": 2,
-        "Time": "Tuesday 3-4",
+        "Time": "Wed 10:00-14:00",
+        "Total_Votes": 2,
+        "Voters": [
+          "User_ID_6",
+          "User_ID_7"
+        ]
+    },
+    {
+        "Time_ID": 3,
+        "Time": "Thu 13:00-14:00",
         "Total_Votes": 2,
         "Voters": [
           "User_ID_6",
@@ -33,6 +42,50 @@ $scope.current_team.Available_Times_Objs = [
         ]
     }
 ];
+$scope.search_box = "Boston";
+$scope.showVoteBtn = true;
+
+function hrToInt(str){
+    return parseFloat(str.replace(":", "."))
+}
+
+
+$scope.getWeather = function (time){
+
+
+
+    if($scope.weather_arr.length != 0){
+        var vote_arr = time.split(" ");
+        var vote_day = vote_arr[0];
+        var time_split = vote_arr[1].split("-");
+        var start = hrToInt(time_split[0]);
+        var end = hrToInt(time_split[1]);
+
+        for(var i = 0; i < $scope.weather_arr.length; i++){
+
+            var split_arr = $scope.weather_arr[i].dt_txt.split(" ");
+            var day = split_arr[0];
+            var hour = hrToInt(split_arr[4]);
+
+            if(vote_day == day){
+
+                if((start <= hour) && (end >= hour)){
+                    return $scope.weather_arr[i].weather[0]["description"];
+                }else if(i == $scope.weather_arr.length-1){
+                    return $scope.weather_arr[i].weather[0]["description"];
+                }else if(start >= hour){
+                    return $scope.weather_arr[i].weather[0]["description"];
+                }
+
+            }
+
+        }
+
+    }
+
+    return "No Weather Data";
+
+};
 
 
 function htmlToElement(html) {
@@ -261,7 +314,7 @@ $scope.adminLogin = function(){
 
 $scope.submitVote = function () {
 
-    
+
 
     console.log($scope.votingForm.vote_radio.$modelValue);
 
@@ -333,7 +386,7 @@ $scope.getData = function(){
 
     console.log("sending req");
 
-    var s = '/get-data/' + $scope.search_box;
+    var s = '/get-data/Boston';
 
     $http.get(s).success(function(response){
 
@@ -346,13 +399,49 @@ $scope.getData = function(){
             var d = new Date(response.list[i].dt_txt);
             var h = d.getHours();
 
-            if(h > 8 && h < 19){
+            //if(h > 8 && h < 19){
                 response.list[i].dt_txt = d.toDateString() + ' ' + h + ":00";
                 $scope.weather_arr.push(response.list[i]);
-            }
+            //}
         }
     });
 
 };
+
+$scope.getData2 = function(){
+
+    $scope.weather_arr = [];
+
+    console.log("sending req");
+
+    var s = 'https://api.openweathermap.org/data/2.5/forecast?q=Boston,US&appid=829f2c926714e2cc6f6f1241c9003641';
+
+    $http.get(s).then(function(response){
+
+        //response = JSON.parse(response);
+
+        console.log("got the data", response);
+
+        var arr = response.data.list;
+
+        for(var i = 0; i < arr.length; i++){
+
+            var d = new Date(arr[i].dt_txt);
+            var h = d.getHours();
+
+            if(h > 8 && h < 19){
+                arr[i].dt_txt = d.toDateString() + ' ' + h + ":00";
+                $scope.weather_arr.push(arr[i]);
+            }
+        }
+
+        console.log("$scope.weather_arr", $scope.weather_arr);
+
+    });
+
+};
+
+$scope.getData();
+
     }
     }());
