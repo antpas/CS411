@@ -97,7 +97,9 @@
 <body>
 
   <script type="text/javascript">
-    var x = "String";
+
+
+
     function handleClientLoad() {
       // Loads the client library and the auth2 library together for efficiency.
       // Loading the auth2 library is optional here since `gapi.client.init` function will load
@@ -155,11 +157,23 @@
 //      pre.appendChild(textContent);
 //    }
 
+
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ampm;
+    return strTime;
+  }
+
     function makeApiCall() {
 
       var week = new Date();
       week.setDate(week.getDate() + 6);
-      gapi.client.calendar.events.list({
+      return gapi.client.calendar.events.list({
         'calendarId': 'primary',
         'timeMin': (new Date()).toISOString(),
         'showDeleted': false,
@@ -181,6 +195,9 @@
 
 
         if (events.length > 0) {
+
+          //console.log("events", events)
+
           for (i = 0; i < events.length; i++) {
             var event = events[i];
             var when = event.start.dateTime;
@@ -201,6 +218,7 @@
           i = i + 1;
 
         }
+
         var d;
         var n;
         var hours;
@@ -217,20 +235,23 @@
           Saturday: []
         };
 
+
+
         for(var i = 0; i < busyTimes.length; i++){
           d = new Date(busyTimes[i]);
           n = weekday[d.getDay()];
-          hours = d.getHours();
-          minutes = d.getMinutes();
-          time = hours + ":" +  minutes
+          //hours = d.getHours();
+          //minutes = d.getMinutes();
+          //time = hours + ":" +  minutes
 
           var day_of_week_string = n;
-          busy[day_of_week_string].push(time)
+
+          //console.log("day_of_week_string", day_of_week_string);
+
+          busy[day_of_week_string].push(formatAMPM(d))
         }
-//        $("/busy", function(data,status){
-//            console.log("Sent");
-//          });
-        console.log(busy);
+
+        return busy;
 
       });
     }
