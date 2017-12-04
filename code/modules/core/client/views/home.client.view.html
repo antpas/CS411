@@ -10,6 +10,8 @@
     
 <div ng-show="cur_view == 'SignUp'">
 
+
+
     <div class="container">
       <div class="row">
 
@@ -98,13 +100,27 @@
 
 </div>
 
+<div ng-show="cur_view == 'Created'">
+	<h4>Account Saved</h4>
+</div>
+
 <div ng-show="cur_view == 'User'">
 
     <h1>User Info</h1>
 
-    <button ng-click="getUserData()">Get Data</button>
+    <div>
 
-    <button ng-click="cur_view = 'Voting'">Vote</button>
+	  <button id="signin-button" onclick="handleSignInClick()">Import Google Calendar + Sign In</button>
+
+	</div>
+
+    <button ng-click="importTimesFromGC()">Save Google Calendar To Account</button>
+
+    <button ng-click="getFreeTimes()">Get Free Times</button>
+
+    <input type="text" ng-model="voting_id" />
+
+    <button ng-click="getVotingTimes(); cur_view = 'Voting'">Vote</button>
 
     <h4>Name: {{current_user.Name}}</h4>
     <h4>User ID: {{current_user.User_ID}}</h4>
@@ -121,7 +137,7 @@
 
         <h1>Voting Results</h1>
 
-        <form name="votingForm" ng-if="weather_arr.length != 0">
+        <form name="votingForm">
 
             <div style="margin-top: 20px; font-size: 28px" ng-repeat="obj in current_team.Available_Times_Objs">
              <input type="radio" name="vote_radio" ng-model="$parent.Time_ID" value="{{obj.Time_ID}}" required /> {{obj.Time}} || {{getWeather(obj.Time)}} || ({{obj.Total_Votes}} votes)
@@ -146,11 +162,7 @@
 
 </div>
 
-<div>
 
-  <button id="signin-button" onclick="handleSignInClick()">Import Google Calendar + Sign In</button>
-
-</div>
 
 <div ng-show="cur_view == 'Admin_Create'">
 
@@ -173,6 +185,8 @@
 <div ng-show="cur_view == 'Admin_Manage'">
 
     <h1>Manage Team</h1>
+
+    <button ng-click="getFreeTimes()">Get Free Times</button>
 
     <h4>Team ID: {{current_team.Team_ID}}</h4>
 
