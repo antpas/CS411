@@ -371,6 +371,29 @@ app.route('/free-times').post(function(req, res) {
       });
       
   });
+
+  app.route('/import-gc').post(function(req, res) {
+      var user_data = req.body;
+      db.collection('users').updateOne({User_ID: user_data.id}, {$set: {"Busy_Times": user_data.data}}, function (err, res2) {
+          if(err){
+              
+          }else{
+              
+              db.collection('users').findOne({User_ID: user_data.id}, function (err, res3) {
+                  if(err){
+                      
+                  }else{
+                      console.log("import responce", res3);
+                      
+                      res.json(res3);
+                      
+                  }
+              });
+              
+          }
+      });
+      
+  });
   
   app.route('/admin-login').post(function(req, res) {
       var user_data = req.body;
@@ -383,6 +406,21 @@ app.route('/free-times').post(function(req, res) {
               if(res2.Admin_Password == user_data.password){
                   res.json(res2);
               }
+              
+          }
+      });
+     
+  });
+
+  app.route('/get-voting-times').post(function(req, res) {
+      var user_data = req.body;
+      db.collection('teams').findOne({Team_ID: user_data.Team_ID}, function (err, res2) {
+          if(err){
+              
+          }else{
+              console.log("get voting responce", res2);
+              
+                res.json(res2);
               
           }
       });
