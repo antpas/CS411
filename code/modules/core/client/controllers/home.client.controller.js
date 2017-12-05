@@ -6,8 +6,9 @@
     .controller('HomeController', HomeController);
 
   function HomeController($scope, $http) {
+   
     $scope.current_user = {};
-$scope.cur_view = 'SignUp';
+$scope.cur_view = 'Home';
 $scope.selected_vote = "";
 $scope.current_team = {};
 
@@ -23,7 +24,7 @@ $scope.importTimesFromGC = function(){
     busy_times.then(function(data){
 
         angular.forEach(data, function(value, key){
-             
+
             var formatted_key = key.slice(0, 3);
 
             if($scope.current_user.Busy_Times[formatted_key]){
@@ -48,8 +49,8 @@ $scope.importTimesFromGC = function(){
 
 
     });
-    
-}
+
+};
 
 
 $scope.getWeather = function (time){
@@ -260,9 +261,9 @@ $scope.userSubmit = function () {
 
       $http.post("/create-user", data).success(function(data, status) {
         console.log('Data posted successfully');
-      })
+      });
 
-      $scope.cur_view = 'Created';
+      $scope.cur_view = 'Home';
 
 };
 
