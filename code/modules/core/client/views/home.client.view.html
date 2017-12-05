@@ -1,71 +1,101 @@
 <div>
-<button ng-click="cur_view = 'SignUp'">SignUp</button>
-<button ng-click="cur_view = 'SignIn'">SignIn</button>
-<button ng-click="cur_view = 'User'">User</button>
+
+  <button ng-click="cur_view = 'User'">User</button>
 <button ng-click="cur_view = 'Voting'">Voting</button>
-<button ng-click="cur_view = 'Admin_SignIn'">Admin_SignIn</button>
-<button ng-click="cur_view = 'Admin_Create'">Admin_Create</button>
 <button ng-click="cur_view = 'Admin_Manage'">Admin_Manage</button>
 <button ng-click="cur_view = 'Weather'">Weather</button>
-    
+
+<div class="row" ng-show="cur_view == 'Home'">
+
+    <center>
+        <div class="col-lg-12">
+
+            <div class="row" style="margin-top: 40px">
+                <h1>Scheduler</h1>
+                <h4>App for teams to find free times to meet</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <button class="btn btn-lg btn-info" ng-click="cur_view = 'SignUp'">Sign Up</button>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <button class="btn btn-lg btn-info" ng-click="cur_view = 'SignIn'">Login</button>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <button class="btn btn-lg btn-info" ng-click="cur_view = 'Admin_Create'">Create Team</button>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <button class="btn btn-lg btn-info" ng-click="cur_view = 'Admin_SignIn'">Manager Login</button>
+            </div>
+
+        </div>
+    </center>
+
+</div>
+
 <div ng-show="cur_view == 'SignUp'">
 
-
-
     <div class="container">
+
       <div class="row">
 
-        <div class="col-sm-6">
+        <div class="col-lg-12">
           <!-- FORM ============ -->
 
-          <form name="userForm" ng-submit="submitForm()" novalidate>
+            <center>
 
-            <!-- NAME -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
-              <label>Name</label>
-              <input type="text" name="name" class="form-control" ng-model="name" required>
+                <h1>Sign Up</h1>
 
-              <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
-            </div>
+                <form name="userForm" ng-submit="submitForm()" novalidate style="width: 50%; margin-top: 40px">
 
-            <!-- USERNAME -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
-              <label>Team ID</label>
-              <input type="text" name="team_id" class="form-control" ng-model="team_id">
-              <p ng-show="userForm.username.$error.minlength" class="help-block">Team ID is too short.</p>
-              <p ng-show="userForm.username.$error.maxlength" class="help-block">Team ID is too long.</p>
-            </div>
+                    <!-- NAME -->
+                    <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+                      <label>Name</label>
+                      <input type="text" name="name" class="form-control" ng-model="name" required>
 
-            <!-- EMAIL -->
-            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-              <label>Email</label>
-              <input type="email" name="email" class="form-control" ng-model="email">
-              <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
-            </div>
+                      <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your name is required.</p>
+                    </div>
 
-            <label>Password</label>
-            <input placeholder="Password"
-                   class="form-control"
-                   name="password" ng-model="password" ng-model-options="{ updateOn: 'blur' }"
-                   required type="password" pattern=".{5,}" />
-            <div class="error-message"
-                 ng-show="userForm.password.$invalid && !userForm.password.$pristine">
-              Passwords must have at least 5 chars.
-            </div>
+                    <!-- USERNAME -->
+                    <div class="form-group" style="margin-top: 40px" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+                      <label>Team ID</label>
+                      <input type="text" name="team_id" class="form-control" ng-model="team_id">
+                      <p ng-show="userForm.username.$error.minlength" class="help-block">Team ID is too short.</p>
+                      <p ng-show="userForm.username.$error.maxlength" class="help-block">Team ID is too long.</p>
+                    </div>
 
-            <label>Import Student Link</label>
-            <input type="text" class="form-control" id="page_source" placeholder="Page Source" ng-model="page_source" />
+                    <!-- EMAIL -->
+                    <div class="form-group" style="margin-top: 40px" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+                      <label>Email</label>
+                      <input type="email" name="email" class="form-control" ng-model="email">
+                      <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                    </div>
+
+                    <label style="margin-top: 40px">Password</label>
+                    <input placeholder="Password"
+                           class="form-control"
+                           name="password" ng-model="password" ng-model-options="{ updateOn: 'blur' }"
+                           required type="password" pattern=".{5,}" />
+                    <div class="error-message"
+                         ng-show="userForm.password.$invalid && !userForm.password.$pristine">
+                      Passwords must have at least 5 chars.
+                    </div>
+
+                    <label style="margin-top: 40px">Import Student Link</label>
+                    <input type="text" class="form-control" id="page_source" placeholder="Page Source" ng-model="page_source" />
 
 
-            <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="userSubmit()">Submit</button>
+                    <button type="submit" class="btn btn-primary" style="margin-top: 40px" ng-disabled="userForm.$invalid" ng-click="userSubmit()">Submit</button>
 
-          </form>
+                  </form>
+            </center>
+
         </div>
-        <div class="col-sm-6">
 
-        </div>
       </div>
-
 
     </div>
 
@@ -73,61 +103,101 @@
 
 <div ng-show="cur_view == 'SignIn'">
 
-    <!--<input type="text" id="login_username" placeholder="Email" ng-model="login_username" />-->
+    <div class="container">
 
-    <!--<input type="text" id="login_password" placeholder="Password" ng-model="login_password" />-->
+      <div class="row">
 
-  <!-- EMAIL -->
-  <div class="form-group"  ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
-    <label>Email</label>
-    <input type="email" id="login_username" name="email" class="form-control" ng-model="login_username">
-    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
-  </div>
+        <div class="col-lg-12">
+          <!-- FORM ============ -->
 
-  <label>Password</label>
-  <input placeholder="Password"
-         class="form-control"
-         id="login_password"
-         name="password" ng-model="login_password" ng-model-options="{ updateOn: 'blur' }"
-         required type="password" pattern=".{5,}" />
-  <div class="error-message"
-       ng-show="userForm.password.$invalid && !userForm.password.$pristine">
-    Passwords must have at least 5 chars.
-  </div>
+            <center>
+
+                <h1>Sign In</h1>
+
+                <form name="loginForm" ng-submit="submitForm()" novalidate style="width: 50%; margin-top: 40px">
+
+                    <!-- EMAIL -->
+                    <div class="form-group" style="margin-top: 40px" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                      <label>Email</label>
+                      <input type="email" name="email" placeholder="Email" class="form-control" ng-model="login_username">
+                      <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                    </div>
+
+                    <label style="margin-top: 40px">Password</label>
+                    <input placeholder="Password"
+                           class="form-control"
+                           name="password" ng-model="login_password" ng-model-options="{ updateOn: 'blur' }"
+                           required type="password" pattern=".{5,}" />
+                    <div class="error-message"
+                         ng-show="loginForm.password.$invalid && !loginForm.password.$pristine">
+                      Passwords must have at least 5 chars.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 40px" ng-disabled="loginForm.$invalid" ng-click="login()">Sign In</button>
+
+                  </form>
+
+            </center>
 
 
-  <button ng-click="login()">Sign In</button>
 
-</div>
+        </div>
 
-<div ng-show="cur_view == 'Created'">
-	<h4>Account Saved</h4>
+      </div>
+
+    </div>
+
 </div>
 
 <div ng-show="cur_view == 'User'">
 
-    <h1>User Info</h1>
+    <center>
+        <div class="col-lg-12">
 
-    <div>
+            <div class="row" style="margin-top: 40px">
+                <h1>User Profile</h1>
+            </div>
 
-	  <button id="signin-button" onclick="handleSignInClick()">Import Google Calendar + Sign In</button>
+            <div class="row" style="margin-top: 40px">
 
-	</div>
+                <button class="btn btn-lg btn-info" onclick="handleSignInClick()">Import Google Calendar + Sign In</button>
 
-    <button ng-click="importTimesFromGC()">Save Google Calendar To Account</button>
+                <button class="btn btn-lg btn-info" ng-click="importTimesFromGC()">Save Google Calendar To Account</button>
 
-    <button ng-click="getFreeTimes()">Get Free Times</button>
+                <button class="btn btn-lg btn-info" ng-click="getFreeTimes()">Get Free Times</button>
 
-    <input type="text" ng-model="voting_id" />
+                <input class="form-control" style="width: 30%; margin-top: 20px" type="text" placeholder="Team ID" ng-model="voting_id" />
 
-    <button ng-click="getVotingTimes(); cur_view = 'Voting'">Vote</button>
+                <button class="btn btn-lg btn-info" style="margin-top: 20px" ng-click="getVotingTimes(); cur_view = 'Voting'">Vote</button>
 
-    <h4>Name: {{current_user.Name}}</h4>
-    <h4>User ID: {{current_user.User_ID}}</h4>
-    <h4>Email: {{current_user.Email}}</h4>
-    <h4>Password: {{current_user.Password}}</h4>
-    <h4>Teams: {{current_user.Teams}}</h4>
-    <h4>Busy Times: {{current_user.Busy_Times}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>Name: {{current_user.Name}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>User ID: {{current_user.User_ID}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>Email: {{current_user.Email}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>Password: {{current_user.Password}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>Teams: {{current_user.Teams}}</h4>
+            </div>
+
+            <div class="row" style="margin-top: 40px">
+                <h4>Busy Times: {{current_user.Busy_Times}}</h4>
+            </div>
+
+        </div>
+    </center>
 
 </div>
 
@@ -143,8 +213,7 @@
              <input type="radio" name="vote_radio" ng-model="$parent.Time_ID" value="{{obj.Time_ID}}" required /> {{obj.Time}} || {{getWeather(obj.Time)}} || ({{obj.Total_Votes}} votes)
             </div>
 
-
-            <button class="btn btn-success" style="margin-top: 20px" ng-click="submitVote(); showVoteBtn = false" ng-show="showVoteBtn">Submit Vote</button>
+            <button class="btn btn-info" style="margin-top: 20px" ng-click="submitVote(); showVoteBtn = false" ng-show="showVoteBtn">Submit Vote</button>
 
         </form>
 
@@ -154,15 +223,49 @@
 
 <div ng-show="cur_view == 'Admin_SignIn'">
 
-    <input type="text" id="admin_login_username" placeholder="Email" ng-model="admin_login_username" />
+    <div class="container">
 
-    <input type="text" id="admin_login_password" placeholder="Password" ng-model="admin_login_password" />
+      <div class="row">
 
-    <button ng-click="adminLogin()">Sign In</button>
+        <div class="col-lg-12">
+          <!-- FORM ============ -->
+
+            <center>
+
+                <h1>Manager Sign In</h1>
+
+                <form name="adminLoginForm" ng-submit="submitForm()" novalidate style="width: 50%; margin-top: 40px">
+
+                    <!-- EMAIL -->
+                    <div class="form-group" style="margin-top: 40px" ng-class="{ 'has-error' : adminLoginForm.email.$invalid && !adminLoginForm.email.$pristine }">
+                      <label>Email</label>
+                      <input type="email" name="email" placeholder="Email" class="form-control" ng-model="admin_login_username">
+                      <p ng-show="adminLoginForm.email.$invalid && !adminLoginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                    </div>
+
+                    <label style="margin-top: 40px">Password</label>
+                    <input placeholder="Password"
+                           class="form-control"
+                           name="password" ng-model="admin_login_password" ng-model-options="{ updateOn: 'blur' }"
+                           required type="password" pattern=".{5,}" />
+                    <div class="error-message"
+                         ng-show="adminLoginForm.password.$invalid && !adminLoginForm.password.$pristine">
+                      Passwords must have at least 5 chars.
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 40px" ng-disabled="adminLoginForm.$invalid" ng-click="adminLogin()">Sign In</button>
+
+                  </form>
+
+            </center>
+
+        </div>
+
+      </div>
+
+    </div>
 
 </div>
-
-
 
 <div ng-show="cur_view == 'Admin_Create'">
 
@@ -184,15 +287,28 @@
 
 <div ng-show="cur_view == 'Admin_Manage'">
 
-    <h1>Manage Team</h1>
+    <center>
+        <div class="col-lg-12">
 
-    <button ng-click="getFreeTimes()">Get Free Times</button>
+            <div class="row" style="margin-top: 40px">
+                <h1>Manage Team</h1>
+            </div>
 
-    <h4>Team ID: {{current_team.Team_ID}}</h4>
+            <div class="row" style="margin-top: 40px">
+                <button class="btn btn-info" ng-click="getFreeTimes()">Voting Results</button>
+            </div>
 
-    <h4>Users:</h4>
+            <div class="row" style="margin-top: 40px">
+                <h4>Team ID: {{current_team.Team_ID}}</h4>
+            </div>
 
-    <p ng-repeat="user in current_team.Emails">{{user}}</p>
+            <div class="row" style="margin-top: 40px">
+                <h4>Users:</h4>
+                <p ng-repeat="user in current_team.Emails">{{user}}</p>
+            </div>
+
+        </div>
+    </center>
 
 </div>
 
@@ -205,5 +321,5 @@
     <p ng-repeat="obj in weather_arr">{{obj.dt_txt}}: {{ obj.weather[0]["main"] }} ({{ obj.weather[0]["description"] }})</p>
 
 </div>
-
+  
 </div>
