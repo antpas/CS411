@@ -41,3 +41,14 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.navbar-inverse{
+  display: none;
+  border-color: white;
+  background-color: white;
+  background-image: none;
+}
+
+body{
+  background-image: url("../views/GSU.png");
+}
