@@ -75,8 +75,20 @@ $scope.getWeather = function (time){
         for(var i = 0; i < $scope.weather_arr.length; i++){
 
             var split_arr = $scope.weather_arr[i].dt_txt.split(" ");
-            var day = split_arr[0];
-            var hour = hrToInt(split_arr[4]);
+
+            var weekdays = new Array(7);
+            weekdays[0] = "Sunday";
+            weekdays[1] = "Monday";
+            weekdays[2] = "Tuesday";
+            weekdays[3] = "Wednesday";
+            weekdays[4] = "Thursday";
+            weekdays[5] = "Friday";
+            weekdays[6] = "Saturday";
+
+            var current_date = new Date(split_arr[0]);
+
+            var day = weekdays[current_date.getDay()].slice(0,3);
+            var hour = hrToInt(split_arr[1]);
 
             if(vote_day == day){
 
@@ -278,7 +290,10 @@ $scope.getFreeTimes = function () {
 
         //returns whole team object back
         console.log("responce", responce);
+
         $scope.current_team = responce;
+
+        $scope.cur_view = 'Voting'
 
         console.log('got free times');
       })
@@ -326,7 +341,7 @@ $scope.adminLogin = function(){
 $scope.getVotingTimes = function(){
 
     var login_data = {
-        Team_ID: $scope.voting_id,
+        Team_ID: $scope.current_user.Teams[0],
     };
 
     $http.post('/get-voting-times', login_data).success(function(response){
@@ -335,7 +350,7 @@ $scope.getVotingTimes = function(){
 
         $scope.current_team = response;
 
-        //$scope.cur_view = 'Voting';
+        $scope.cur_view = 'Voting';
 
     });
 
@@ -382,7 +397,7 @@ $scope.createTeam = function () {
         "Team_ID": generateUUID(),
         "Emails": $scope.c_team_emails.replace(/\s/g, '').split(','),
         "Constraints":{
-            "Meeting_Length": $scope.c_meeting_length,
+            "Meeting_Length": 60,
             "Min_Time": 8,
             "Max_Time":10
           },
@@ -429,7 +444,7 @@ $scope.getData = function(){
             var h = d.getHours();
 
             //if(h > 8 && h < 19){
-                response.list[i].dt_txt = d.toDateString() + ' ' + h + ":00";
+                //response.list[i].dt_txt = d.toDateString() + ' ' + h + ":00";
                 $scope.weather_arr.push(response.list[i]);
             //}
         }
