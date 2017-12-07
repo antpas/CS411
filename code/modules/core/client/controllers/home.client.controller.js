@@ -65,7 +65,7 @@ $scope.getWeather = function (time){
         //console.log("vote_arr", vote_arr);
 
         if(!vote_arr[3]){
-            return "few clouds"
+            return ""
         }
 
         var vote_day = vote_arr[0];
@@ -106,7 +106,7 @@ $scope.getWeather = function (time){
 
     }
 
-    return "few clouds";
+    return "";
 
 };
 
@@ -279,10 +279,6 @@ $scope.userSubmit = function () {
 
 };
 
-$scope.updateUser = function () {
-
-};
-
 $scope.getFreeTimes = function () {
 
 
@@ -358,8 +354,6 @@ $scope.getVotingTimes = function(){
 
 $scope.submitVote = function () {
 
-
-
     console.log($scope.votingForm.vote_radio.$modelValue);
 
     for(var i = 0; i < $scope.current_team.Available_Times_Objs.length; i++){
@@ -421,10 +415,6 @@ $scope.createTeam = function () {
 
 };
 
-$scope.updateTeam = function () {
-
-};
-
 $scope.getData = function(){
     $scope.weather_arr = [];
 
@@ -442,45 +432,10 @@ $scope.getData = function(){
 
             var d = new Date(response.list[i].dt_txt);
             var h = d.getHours();
-
-            //if(h > 8 && h < 19){
-                //response.list[i].dt_txt = d.toDateString() + ' ' + h + ":00";
-                $scope.weather_arr.push(response.list[i]);
-            //}
+            //response.list[i].dt_txt = d.toDateString() + ' ' + h + ":00";
+            $scope.weather_arr.push(response.list[i]);
+            
         }
-    });
-
-};
-
-$scope.getData2 = function(){
-
-    $scope.weather_arr = [];
-
-    console.log("sending req");
-
-    var s = 'https://api.openweathermap.org/data/2.5/forecast?q=Boston,US&appid=829f2c926714e2cc6f6f1241c9003641';
-
-    $http.get(s).then(function(response){
-
-        //response = JSON.parse(response);
-
-        console.log("got the data", response);
-
-        var arr = response.data.list;
-
-        for(var i = 0; i < arr.length; i++){
-
-            var d = new Date(arr[i].dt_txt);
-            var h = d.getHours();
-
-            if(h > 8 && h < 19){
-                arr[i].dt_txt = d.toDateString() + ' ' + h + ":00";
-                $scope.weather_arr.push(arr[i]);
-            }
-        }
-
-        console.log("$scope.weather_arr", $scope.weather_arr);
-
     });
 
 };
