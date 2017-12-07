@@ -4,6 +4,14 @@
 
 <!-- Description -->
 
+# Main Files Changed
+* 1) code/modules/core/client/controllers/home.client.controller.js (angular controller)
+* 2) code/modules/core/client/views/home.client.view.html (html view)
+* 3) code/modules/core/client/css/core.css (small style changes)
+* 4) code/modules/core/server/routes/core.server.routes.js (Express routes)
+* 5) code/modules/core/server/controllers/core.server.controller.js (functions for routes)
+* 6) code/modules/core/server/views/layout.server.view.html (sign-in with Google)
+
 # Features
 Our website serves as an automated scheduler for groups and teams from Boston University and beyond
 * 1) Students join a group/team on our website
