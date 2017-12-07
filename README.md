@@ -5,12 +5,12 @@
 <!-- Description -->
 
 # Features
-Our website serves as a automated scheduler for groups and teams and Boston University and beyond
+Our website serves as an automated scheduler for groups and teams from Boston University and beyond
 * 1) Students join a group/team on our website
 * 2) Their BU calendar and Google Calendar are imported into our website
-* 3) All of their calendars are cross references and 3 of the top overlapping free times for the group are displayed
+* 3) All of their calendars are cross referenced and overlapping free times for the group are displayed
 * 4) Along with these free time slots, the weather at that time and day is displayed as well; this helps students decide on the best time
-* 5) Students vote for one of the time slots; the most votes win!
+* 5) Students vote for one of the time slots; the time with the most votes will decide the time of the meeting
 
 # Preview
 ![alt text](//Insert Screenshot Here)
