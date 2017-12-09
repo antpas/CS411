@@ -21,7 +21,7 @@ Our website serves as an automated scheduler for groups and teams from Boston Un
 * 5) Students vote for one of the time slots; the time with the most votes will decide the time of the meeting
 
 # Preview
-![Alt text](/Documentation/teamtimes.jpg?raw=true "Team Times Screenshot")
+![Alt text](/Documentation/teamtimes.png?raw=true "Team Times Screenshot")
 
 # Requirements to Run
 1)  NodeJS
