@@ -62,6 +62,10 @@ Our website serves as an automated scheduler for groups and teams from Boston Un
 
   Your application should run on port 3000: [http://localhost:3000](http://localhost:3000)
 
+# Next Steps
+* 1. Kerberos sign in integration, to get BU Schedule more easily.
+* 2. Create Google Calendar Event after Team has voted on a time.
+* 3. Send out emails to Team Members with link to vote.
 
 
 
