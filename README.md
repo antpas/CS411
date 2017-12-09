@@ -21,7 +21,7 @@ Our website serves as an automated scheduler for groups and teams from Boston Un
 * 5) Students vote for one of the time slots; the time with the most votes will decide the time of the meeting
 
 # Preview
-![Imgur Image](https://imgur.com/a/C3Pe2.jpg)
+![Imgur](https://imgur.com/a/C3Pe2.jpg)
 
 # Requirements to Run
 1)  NodeJS
